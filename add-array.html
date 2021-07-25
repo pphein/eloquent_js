@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items and Their Quantities in Arrays</title>
+    <style>
+        .content {
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: bisque;
+            padding: 50px;
+            border: solid sandybrown 2px;
+        }
+        
+        h1 {
+            color: rgb(245, 147, 61);
+            margin-bottom: 50px;
+        }
+        
+        #data {
+            height: 30px;
+            width: 300px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            border-style: solid;
+            outline: none;
+            color: rgb(82, 80, 80);
+        }
+        
+        #btn {
+            width: 80px;
+            height: 56px;
+            border-radius: 50px;
+            margin-left: 10px;
+            text-shadow: none;
+            outline: none;
+        }
+        
+        #lists li {
+            text-align: left;
+            font-size: 25px;
+            margin-left: 30px;
+            color: rgb(245, 147, 61);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <h1>Data Lists</h1>
+        <ol id="lists"></ol>
+
+        <input type="text" id="data">
+        <button id="btn" onclick="addItem()">Add</button>
+    </div>
+
+    <script>
+        var lists = [];
+        var oldItem;
+        var qty = [];
+        var q = 1;
+
+        var init = function() {
+            document.getElementById("lists").innerHTML = "";
+            document.getElementById("data").value = "";
+
+        }
+
+        //Show Data Lists Function
+        var show = function showItem() {
+
+            init();
+
+            for (var i = 0; i < lists.length; i++) {
+                oldItem = lists[i];
+                console.log(oldItem);
+                var node = document.createElement("li");
+
+                var liAdd = document.getElementById("lists").appendChild(node);
+                liAdd.innerText = oldItem + " ( " + qty[i] + " )";
+            }
+        }
+
+        //ADD Item And Its Quantity Function
+        function addItem() {
+
+            var item = document.getElementById("data").value;
+
+            if (item) {
+                for (var i = 0; i < lists.length; i++) {
+                    oldItem = lists[i];
+                    if (item == oldItem) {
+                        if (confirm("Your data has already existed. Are you sure to add this data again?")) {
+                            qty[i]++;
+                            show();
+                            return 0;
+                        } else {
+                            show();
+                            return 0;
+                        }
+                    }
+                }
+                lists.push(item);
+                qty.push(q);
+            } else {
+                alert("No Input Data! Please something...");
+            }
+
+            show();
+            //console.log(lists);
+            //console.log(qty);
+        }
+    </script>
+</body>
+
+</html>
